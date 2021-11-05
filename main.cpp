@@ -3,8 +3,7 @@
 
 int main() {
 
-	cout << 123;
-	cout << 1234;
+	/*i love microsoft*/
 
 	return 0;
 }
