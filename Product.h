@@ -11,7 +11,7 @@ using namespace std;
 class ProductInfo {
 public:
 	ProductInfo(string, string);
-	const string Name;
+	string Name;
 	const string Parcode;
 	bool operator==(ProductInfo&)const;
 	bool operator==(string)const;
@@ -35,8 +35,8 @@ private:
 public:
 	Cart();
 	ProductNode_p& getFront();
-	bool Test(string,int);
-	void ServeClient(string,int);
+	void addtoClientCart(string,int);
+	void ServeClient();
 	shared_ptr<ProductNode>& addInfo(string, string = "unKnown!");
 	shared_ptr<ProductNode>& popFront();
 };

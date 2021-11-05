@@ -42,36 +42,49 @@ ProductNode_p& Cart::getFront()
 
 ProductNode_p& Cart::addInfo(string i, string N) {
 
-	for (ProductNode_p temp = Front; temp; temp = temp->Next)
-		if (temp->Info->Parcode == i) return temp;
+	for (ProductNode_p *temp = &Front; temp; (*temp) = (*temp)->Next)
+		if ((*temp)->Info->Parcode == i) {
+			if ((*temp)->Info->Name == "unKnown!") (*temp)->Info->Name = N;
+			return (*temp);
+		}
 	ProductInfo_p* PI_temp = new ProductInfo_p(new ProductInfo(i, N));
 	ProductNode_p* PN_temp = new ProductNode_p(new ProductNode());
 	(*PN_temp)->Info = *PI_temp;
 	(*PN_temp)->Amount = 0;
 	(*PN_temp)->Next = Front;
-	Front = *PN_temp;
-	return *PN_temp;
+	Front = (*PN_temp);
+	return (*PN_temp);
 }
 
 ProductNode_p& Cart::popFront()
 {
 	if (Front) {
-		ProductNode_p dump = Front;
+		ProductNode_p* dump = &Front;
 		Front = Front->Next;
-		return dump;
+		return *dump;
 	}
 	return Front;
 }
-bool Cart::Test(string Parcode, int Amount)
-{
-	return Mall::Test(Parcode, Amount);
-}
 
-void Cart::ServeClient(string Parcode,int Amount)
+
+void Cart::addtoClientCart(string Parcode, int Amount)
 {
-	if (Mall::Test(Parcode,Amount))
+	int& MallAmount = Mall::Products->addInfo(Parcode)->Amount;
+	int& ClientAmount = addInfo(Parcode)->Amount;
+	if (Mall::Test(Parcode, Amount))
 	{
-		addInfo(Parcode)->Amount +=Amount;
-		Mall::Products->addInfo(Parcode)->Amount -=Amount;
+		ClientAmount += Amount;
+		MallAmount -= Amount;
 	}
+	else {
+		ClientAmount += MallAmount;
+		MallAmount = 0;
+		cout << "Sorry,your amount isn't available" << endl
+			<< "You must ask for less amount." << endl
+			<< "returned all Amount in Mall.";
+	}
+}
+void Cart::ServeClient()
+{
+
 }

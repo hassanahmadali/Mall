@@ -29,7 +29,7 @@ public:
 
 	Queue(Client_p&);
 	void push(Client_p&);
-	ClientNode_p& pub();
+	ClientNode_p& pop();
 
 };
 

@@ -35,10 +35,10 @@ void Queue::push(Client_p& Cp) {
 	}
 }
 
-ClientNode_p& Queue::pub() {
-	ClientNode_p CNtemp = Front;
+ClientNode_p& Queue::pop() {
+	ClientNode_p *CNtemp =& Front;
 	Front = Front->Next;
-	return CNtemp;
+	return *CNtemp;
 }
 
 ClientNode::ClientNode() :Data(NULL), Next(NULL)
