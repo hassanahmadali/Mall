@@ -9,7 +9,7 @@ class Client {
 public:
 	Client(int);
 	int getId()const;
-	void push(ProductNode_p);
+	void push(ProductNode_p&);
 	ProductNode_p& pop();
 };
 typedef shared_ptr<Client> Client_p;

@@ -6,7 +6,7 @@ int Client::getId() const
 {
 	return id;
 }
-void Client::push(ProductNode_p Node)
+void Client::push(ProductNode_p& Node)
 {
 	ClientCart.addInfo(Node.get()->Info.get()->Parcode, Node.get()->Info.get()->Name);
 }

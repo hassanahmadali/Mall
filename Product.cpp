@@ -85,15 +85,23 @@ void Cart::addtoClientCart(string Parcode, int Amount)
 	}
 }
 void Cart::addtoMallproducts(string name, string parcode, int amount) {
-	ProductNode_p temp = Mall::Products->getFront();
-	if (temp) {
-		temp = Front->Next;
-		temp = addInfo(parcode, name);
-		temp->Amount = amount;
+	ProductNode_p& MallFront = Mall::Products->getFront();
+	for (ProductNode_p temp = MallFront; temp; temp = temp->Next) {
+		if (temp->Info->Parcode == parcode) {
+			temp->Amount += amount;
+		}
+		else
+		{
+			ProductInfo_p* I = new ProductInfo_p(new ProductInfo(parcode,name));
+			ProductNode_p* N = new ProductNode_p(new ProductNode());
+			(*N)->Info = *I;
+			(*N)->Amount = amount;
+			(*N)->Next = Front;
+			Front = (*N);
+		}
 	}
-	else
-	{
-		Mall::Products->addInfo(parcode, name);
-		Front->Amount = amount;
-	}
+
+	//ProductInfo* Info = new ProductInfo(name, parcode);
+	//ProductNode_p* Node = new 
+
 }
