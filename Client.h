@@ -15,8 +15,8 @@ public:
 typedef shared_ptr<Client> Client_p;
 
 class ClientNode {
-	ClientNode();
 public:
+	ClientNode();
 	Client_p Data;
 	shared_ptr<ClientNode> Next;
 };
@@ -24,9 +24,9 @@ typedef shared_ptr<ClientNode> ClientNode_p;
 
 class Queue {
 	Queue();
-	ClientNode_p First;
+	ClientNode_p Front;
 public:
-	Queue(Client_p);
+	Queue(Client_p&);
 	Client_p get() const;
 	void push(Client_p);
 	void pub();

@@ -15,6 +15,20 @@ ProductNode_p& Client::pop()
 	return ClientCart.pop();
 }
 
-Queue::Queue(Client_p)
+Queue::Queue(Client_p& C)
 {
+	ClientNode_p  CNtemp (new ClientNode());
+	CNtemp->Data = C;
+	Front = CNtemp;
+}
+
+Client_p Queue::get()const {
+
+}
+void Queue::push(Client_p) {
+
+}
+
+void Queue::pub() {
+
 }
