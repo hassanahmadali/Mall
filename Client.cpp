@@ -17,18 +17,30 @@ ProductNode_p& Client::pop()
 
 Queue::Queue(Client_p& C)
 {
+	ClientNode e;
+	
 	ClientNode_p  CNtemp (new ClientNode());
 	CNtemp->Data = C;
 	Front = CNtemp;
+	
 }
 
 Client_p Queue::get()const {
 
 }
-void Queue::push(Client_p) {
-
+void Queue::push(Client_p& Cp) {
+	for (ClientNode_p temp = Front; temp; temp = temp->Next) {
+		if (temp->Next) continue;
+		else {
+			ClientNode_p  CNtemp (new ClientNode());
+			CNtemp->Data = Cp;
+			temp->Next = CNtemp;
+		}
+	}
 }
 
-void Queue::pub() {
-
+ClientNode_p& Queue::pub() {
+	ClientNode_p CNtemp = Front;
+	Front = Front->Next;
+	return CNtemp;
 }

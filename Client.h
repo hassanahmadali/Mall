@@ -27,9 +27,9 @@ class Queue {
 	ClientNode_p Front;
 public:
 	Queue(Client_p&);
-	Client_p get() const;
-	void push(Client_p);
-	void pub();
+	void push(Client_p&);
+	ClientNode_p& pub();
+
 };
 
 #endif
