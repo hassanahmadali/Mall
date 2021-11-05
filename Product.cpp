@@ -42,7 +42,7 @@ ProductNode_p& Cart::getFront()
 
 ProductNode_p& Cart::addInfo(string i, string N) {
 
-	for (ProductNode_p *temp = &Front; temp; (*temp) = (*temp)->Next)
+	for (ProductNode_p* temp = &Front; temp; (*temp) = (*temp)->Next)
 		if ((*temp)->Info->Parcode == i) {
 			if ((*temp)->Info->Name == "unKnown!") (*temp)->Info->Name = N;
 			return (*temp);
@@ -84,7 +84,16 @@ void Cart::addtoClientCart(string Parcode, int Amount)
 			<< "returned all Amount in Mall.";
 	}
 }
-void Cart::ServeClient()
-{
-
+void Cart::addtoMallproducts(string name, string parcode, int amount) {
+	ProductNode_p temp = Mall::Products->getFront();
+	if (temp) {
+		temp = Front->Next;
+		temp = addInfo(parcode, name);
+		temp->Amount = amount;
+	}
+	else
+	{
+		Mall::Products->addInfo(parcode, name);
+		Front->Amount = amount;
+	}
 }

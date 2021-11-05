@@ -28,9 +28,11 @@ class Queue {
 public:
 
 	Queue(Client_p&);
-	void push(Client_p&);
-	ClientNode_p& pop();
 
+	void push(Client_p&);
+	ClientNode_p& getFront();
+	ClientNode_p& pop();
+	void ServeClient();
 };
 
 #endif

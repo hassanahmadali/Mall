@@ -42,6 +42,16 @@ ClientNode_p& Queue::pop() {
 }
 
 ClientNode::ClientNode() :Data(NULL), Next(NULL)
+{}
+ClientNode_p& Queue::getFront()
 {
-
+	return Front;
+}
+void Queue::ServeClient()
+{
+	ClientNode_p dump = getFront();
+	while (dump)
+	{
+		pop();
+	}
 }
