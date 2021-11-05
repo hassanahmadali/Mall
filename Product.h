@@ -34,8 +34,9 @@ private:
 	shared_ptr<ProductNode> Front;
 public:
 	Cart();
+	ProductNode_p& getFront();
 	bool Test(string,int);
-	void ServeClient();
+	void ServeClient(string,int);
 	shared_ptr<ProductNode>& addInfo(string, string = "unKnown!");
 	shared_ptr<ProductNode>& popFront();
 };

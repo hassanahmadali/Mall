@@ -35,6 +35,11 @@ Cart::Cart() {
 	Front = f;
 }
 
+ProductNode_p& Cart::getFront()
+{
+	return Front;
+}
+
 ProductNode_p& Cart::addInfo(string i, string N) {
 
 	for (ProductNode_p temp = Front; temp; temp = temp->Next)
@@ -62,7 +67,11 @@ bool Cart::Test(string Parcode, int Amount)
 	return Mall::Test(Parcode, Amount);
 }
 
-void Cart::ServeClient()
+void Cart::ServeClient(string Parcode,int Amount)
 {
-	;
+	if (Mall::Test(Parcode,Amount))
+	{
+		addInfo(Parcode)->Amount +=Amount;
+		Mall::Products->addInfo(Parcode)->Amount -=Amount;
+	}
 }

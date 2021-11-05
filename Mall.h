@@ -3,8 +3,8 @@
 class Mall
 {
 
-	static Cart* Products;
 
 public:
+	static Cart* Products;
 	static bool Test(string,int);
 };
