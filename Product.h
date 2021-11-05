@@ -9,8 +9,8 @@ using namespace std;
 class ProductInfo {
 public:
 	ProductInfo(int, string);
-	const string Name;
-	const int Parcode;
+	/*const*/ string Name;
+	/*const*/ int Parcode;
 	bool operator==(ProductInfo&)const;
 	bool operator==(int)const;
 };

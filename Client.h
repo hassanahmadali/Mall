@@ -19,7 +19,6 @@ class ClientNode {
 public:
 	Client_p Data;
 	shared_ptr<ClientNode> Next;
-	shared_ptr<Client> Previuse;
 };
 typedef shared_ptr<ClientNode> ClientNode_p;
 
