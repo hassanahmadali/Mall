@@ -10,10 +10,10 @@ public:
 	Client(int);
 	int getId()const;
 	void push(ProductNode_p);
-	void pop();
+	ProductNode_p& pop();
 };
-
 typedef shared_ptr<Client> Client_p;
+
 class ClientNode {
 	ClientNode();
 public:

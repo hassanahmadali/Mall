@@ -33,5 +33,9 @@ public:
 	ProductNode_p& pop();
 };
 
+
+
+
+
 typedef shared_ptr<ProductInfo> ProductInfo_p;
 typedef shared_ptr<ProductNode> ProductNode_p;
