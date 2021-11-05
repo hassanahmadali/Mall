@@ -1,14 +1,16 @@
 #include "Product.h"
 #include"Mall.h"
-ProductInfo::ProductInfo(int p, string N) :Parcode(p), Name(N) {
+#include <string>
+ProductInfo::ProductInfo(string p, string N) :Parcode(p), Name(N) {
 	;
 }
+
 
 bool ProductInfo::operator==(ProductInfo& rhs) const {
 	return (Parcode == rhs.Parcode ? true : false);
 }
 
-bool ProductInfo::operator==(int i)const {
+bool ProductInfo::operator==(string i)const {
 	return (Parcode == i ? true : false);
 }
 
@@ -33,7 +35,8 @@ Cart::Cart() {
 	Front = f;
 }
 
-ProductNode_p& Cart::addInfo(int i, string N) {
+ProductNode_p& Cart::addInfo(string i, string N) {
+
 	for (ProductNode_p temp = Front; temp; temp = temp->Next)
 		if (temp->Info->Parcode == i) return temp;
 	ProductInfo_p* PI_temp = new ProductInfo_p(new ProductInfo(i, N));
@@ -53,4 +56,13 @@ ProductNode_p& Cart::popFront()
 		return dump;
 	}
 	return Front;
+}
+bool Cart::Test(string Parcode, int Amount)
+{
+	return Mall::Test(Parcode, Amount);
+}
+
+void Cart::ServeClient()
+{
+	;
 }

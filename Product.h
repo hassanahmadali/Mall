@@ -10,11 +10,11 @@ using namespace std;
 
 class ProductInfo {
 public:
-	ProductInfo(int, string);
+	ProductInfo(string, string);
 	const string Name;
-	const int Parcode;
+	const string Parcode;
 	bool operator==(ProductInfo&)const;
-	bool operator==(int)const;
+	bool operator==(string)const;
 };
 typedef shared_ptr<ProductInfo> ProductInfo_p;
 
@@ -34,6 +34,8 @@ private:
 	shared_ptr<ProductNode> Front;
 public:
 	Cart();
-	shared_ptr<ProductNode>& addInfo(int, string = "unKnown!");
+	bool Test(string,int);
+	void ServeClient();
+	shared_ptr<ProductNode>& addInfo(string, string = "unKnown!");
 	shared_ptr<ProductNode>& popFront();
 };
