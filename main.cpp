@@ -3,6 +3,7 @@
 
 int main() {
 
+	cout << "HELLO" << endl;
 
 	return 0;
 }
