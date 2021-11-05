@@ -16,6 +16,7 @@ public:
 	bool operator==(ProductInfo&)const;
 	bool operator==(int)const;
 };
+typedef shared_ptr<ProductInfo> ProductInfo_p;
 
 class ProductNode {
 public:
@@ -25,16 +26,14 @@ public:
 	shared_ptr<ProductNode> Next;
 };
 
+typedef shared_ptr<ProductNode> ProductNode_p;
+
 
 class Cart {
 private:
 	shared_ptr<ProductNode> Front;
 public:
 	Cart();
-	void Test();
 	shared_ptr<ProductNode>& addInfo(int, string = "unKnown!");
-	ProductNode_p& pop_front();
+	shared_ptr<ProductNode>& popFront();
 };
-
-typedef shared_ptr<ProductInfo> ProductInfo_p;
-typedef shared_ptr<ProductNode> ProductNode_p;

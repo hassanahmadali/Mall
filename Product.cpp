@@ -1,5 +1,5 @@
 #include "Product.h"
-
+#include"Mall.h"
 ProductInfo::ProductInfo(int p, string N) :Parcode(p), Name(N) {
 	;
 }
@@ -26,7 +26,7 @@ ProductNode::ProductNode() :Info(NULL), Next(NULL), Amount(0) {
 }
 
 Cart::Cart() {
-	ProductNode_p f(new ProductNode);
+	ProductNode_p f(new ProductNode());
 	f->Amount = 0;
 	f->Info = NULL;
 	f->Next = NULL;
@@ -44,13 +44,10 @@ ProductNode_p& Cart::addInfo(int i, string N) {
 	Front = *PN_temp;
 	return *PN_temp;
 }
-void Cart::Test() {
 
-}
-
-ProductNode_p& Cart::pop_front()
+ProductNode_p& Cart::popFront()
 {
-	if (Front->Info != NULL) {
+	if (Front) {
 		ProductNode_p dump = Front;
 		Front = Front->Next;
 		return dump;

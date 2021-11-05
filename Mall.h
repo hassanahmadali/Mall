@@ -4,4 +4,5 @@ class Mall
 {
 
 	static Cart* Products;
+	static bool Test();
 };

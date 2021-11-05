@@ -12,17 +12,15 @@ void Client::push(ProductNode_p Node)
 }
 ProductNode_p& Client::pop()
 {
-	return ClientCart.pop_front();
+	return ClientCart.popFront();
 }
 
 Queue::Queue(Client_p& C)
 {
-	ClientNode e;
-	
-	ClientNode_p  CNtemp (new ClientNode());
+	ClientNode_p  CNtemp(new ClientNode());
 	CNtemp->Data = C;
 	Front = CNtemp;
-	
+
 }
 
 
@@ -30,7 +28,7 @@ void Queue::push(Client_p& Cp) {
 	for (ClientNode_p temp = Front; temp; temp = temp->Next) {
 		if (temp->Next) continue;
 		else {
-			ClientNode_p  CNtemp (new ClientNode());
+			ClientNode_p  CNtemp(new ClientNode());
 			CNtemp->Data = Cp;
 			temp->Next = CNtemp;
 		}
@@ -41,4 +39,9 @@ ClientNode_p& Queue::pub() {
 	ClientNode_p CNtemp = Front;
 	Front = Front->Next;
 	return CNtemp;
+}
+
+ClientNode::ClientNode() :Data(NULL), Next(NULL)
+{
+
 }
