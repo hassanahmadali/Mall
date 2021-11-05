@@ -30,6 +30,7 @@ private:
 public:
 	Cart();
 	shared_ptr<ProductNode>& addInfo(int, string = "unKnown!");
+	ProductNode_p& pop();
 };
 
 typedef shared_ptr<ProductInfo> ProductInfo_p;

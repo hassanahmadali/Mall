@@ -35,35 +35,12 @@ ProductNode_p& Cart::addInfo(int i, string N) {
 	PN_temp->Info = PI_temp;
 	PN_temp->Amount = 0;
 	PN_temp->Next = Front;
-	
 	Front = PN_temp;
-}
-
-/*
-ProductNode_p& Cart::addInfo(int i, string)
-{
-	ProductNode_p dump = First;
-	while (dump)
-	{
-		if (dump.get()->Amount == i)
-		{
-			dump.get()->Amount += 1;
-			return dump;
-		}
-	}
-	dump = First;
-	First = First.get()->Next;
-	First = dump;
-	dump.get()->Amount = 1;
-	dump.get()->Info.get()->Name = "unknow";
-	dump.get()->Info.get()->Parcode = i;
-	return dump;
+	return PN_temp;
 }
 ProductNode_p& Cart::pop()
 {
-	ProductNode_p dump = First;
-	First = First.get()->Next;
+	ProductNode_p dump = Front;
+	Front = Front->Next;
 	return dump;
 }
-
-*/
