@@ -25,22 +25,35 @@ ProductNode::ProductNode() :Info(NULL), Next(NULL), Amount(0) {
 	;
 }
 
-Cart::Cart() : Front(NULL) { ; }
+Cart::Cart() {
+	ProductNode_p f(new ProductNode);
+	f->Amount = 0;
+	f->Info = NULL;
+	f->Next = NULL;
+	Front = f;
+}
 
 ProductNode_p& Cart::addInfo(int i, string N) {
 	for (ProductNode_p temp = Front; temp; temp = temp->Next)
 		if (temp->Info->Parcode == i) return temp;
-	ProductInfo_p PI_temp(new ProductInfo(i, N));
-	ProductNode_p PN_temp(new ProductNode());
-	PN_temp->Info = PI_temp;
-	PN_temp->Amount = 0;
-	PN_temp->Next = Front;
-	Front = PN_temp;
-	return PN_temp;
+	ProductInfo_p* PI_temp = new ProductInfo_p(new ProductInfo(i, N));
+	ProductNode_p* PN_temp = new ProductNode_p(new ProductNode());
+	(*PN_temp)->Info = *PI_temp;
+	(*PN_temp)->Amount = 0;
+	(*PN_temp)->Next = Front;
+	Front = *PN_temp;
+	return *PN_temp;
 }
-ProductNode_p& Cart::pop()
+void Cart::Test() {
+
+}
+
+ProductNode_p& Cart::pop_front()
 {
-	ProductNode_p dump = Front;
-	Front = Front->Next;
-	return dump;
+	if (Front->Info != NULL) {
+		ProductNode_p dump = Front;
+		Front = Front->Next;
+		return dump;
+	}
+	return Front;
 }

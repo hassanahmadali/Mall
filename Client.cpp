@@ -12,7 +12,7 @@ void Client::push(ProductNode_p Node)
 }
 ProductNode_p& Client::pop()
 {
-	return ClientCart.pop();
+	return ClientCart.pop_front();
 }
 
 Queue::Queue(Client_p& C)
@@ -25,9 +25,7 @@ Queue::Queue(Client_p& C)
 	
 }
 
-Client_p Queue::get()const {
 
-}
 void Queue::push(Client_p& Cp) {
 	for (ClientNode_p temp = Front; temp; temp = temp->Next) {
 		if (temp->Next) continue;

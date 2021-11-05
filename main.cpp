@@ -3,7 +3,6 @@
 
 int main() {
 
-	/*i love microsoft*/
 
 	return 0;
 }
