@@ -26,6 +26,7 @@ class Queue {
 	Queue();
 	ClientNode_p Front;
 public:
+
 	Queue(Client_p&);
 	void push(Client_p&);
 	ClientNode_p& pub();
