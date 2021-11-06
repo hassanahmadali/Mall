@@ -10,11 +10,11 @@ Cart Client::getCart()
 {
 	return ClientCart;
 }
-void Client::push(ProductNode_p& Node)
+void Client::push(ProductNode* Node)
 {
-	ClientCart.addInfo(Node.get()->Info.get()->Parcode, Node.get()->Info.get()->Name);
+	ClientCart.addInfo(Node->Info->Parcode, Node->Info->Name);
 }
-ProductNode_p& Client::pop()
+ProductNode* Client::pop()
 {
 	return ClientCart.popFront();
 }
@@ -26,9 +26,9 @@ Queue::Queue():Front(NULL)
 	;
 }
 
-Queue::Queue(Client_p& C)
+Queue::Queue(Client* C)
 {
-	ClientNode_p  CNtemp(new ClientNode());
+	ClientNode*  CNtemp(new ClientNode());
 	CNtemp->Data = C;
 	Front = CNtemp;
 
@@ -36,11 +36,11 @@ Queue::Queue(Client_p& C)
 
 
 void Queue::push(Client& p) {
-	Client_p Cp(& p);
-	for (ClientNode_p temp = Front; temp; temp = temp->Next) {
+	Client* Cp(& p);
+	for (ClientNode* temp = Front; temp; temp = temp->Next) {
 		if (temp->Next) continue;
 		else {
-			ClientNode_p  CNtemp(new ClientNode());
+			ClientNode*  CNtemp =new ClientNode();
 			CNtemp->Data = Cp;
 			temp->Next = CNtemp;
 		}
@@ -49,21 +49,21 @@ void Queue::push(Client& p) {
 
 
 
-ClientNode_p& Queue::pop() {
-	ClientNode_p* CNtemp = &Front;
+ClientNode* Queue::pop() {
+	ClientNode* CNtemp = Front;
 	Front = Front->Next;
-	return *CNtemp;
+	return CNtemp;
 }
 
 ClientNode::ClientNode() :Data(NULL), Next(NULL)
 {}
-ClientNode_p& Queue::getFront()
+ClientNode* Queue::getFront()
 {
 	return Front;
 }
 void Queue::ServeClient()
 {
-	ClientNode_p dump = getFront();
+	ClientNode* dump = getFront();
 	while (dump)
 	{
 		pop();
@@ -74,7 +74,7 @@ void Queue::ServeClient()
 
 ostream& operator<< (ostream& output, Client& C) {
 	output << "Client ID " << C.getId();
-	for (ProductNode_p temp = C.getCart().getFront(); temp; temp = temp->Next) {
+	for (ProductNode* temp = C.getCart().getFront(); temp; temp = temp->Next) {
 		output << temp->Info << " Amount " << temp->Amount;
 	}
 	return output;

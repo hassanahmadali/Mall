@@ -42,7 +42,7 @@ int main() {
 			cout << "Enter Parcode,needed amount of product" << endl;
 			cin >> parcode >> amount;
 			//ProductNode_p* dump = new ProductNode_p(new ProductNode());
-			for (ClientNode_p temp = m.Q.getFront(); temp; temp = temp->Next) {
+			for (ClientNode* temp = m.Q.getFront(); temp; temp = temp->Next) {
 				if (temp->Data->getId() == id)
 				{
 					temp->Data->getCart().addtoClientCart(parcode, amount);
@@ -58,7 +58,7 @@ int main() {
 		}
 		case(5):
 		{
-			for (ClientNode_p temp = m.Q.getFront(); temp; temp = temp->Next) {
+			for (ClientNode* temp = m.Q.getFront(); temp; temp = temp->Next) {
 				cout << temp->Data;
 			}
 			break;

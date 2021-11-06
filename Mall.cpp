@@ -4,7 +4,7 @@ Cart* Mall::Products = new Cart();
 
 bool Mall::Test(string Parcode, int Amount)
 {
-	ProductNode_p temp = Products->getFront();
+	ProductNode* temp = Products->getFront();
 	while (temp)
 	{
 		if (temp->Info->Parcode == Parcode) {

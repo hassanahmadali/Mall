@@ -10,28 +10,24 @@ public:
 	Client(int);
 	int getId()const;
 	Cart getCart();
-	void push(ProductNode_p&);
-	ProductNode_p& pop();
+	void push(ProductNode*);
+	ProductNode* pop();
 };
-
-typedef shared_ptr<Client> Client_p;
-
 class ClientNode {
 public:
 	ClientNode();
-	Client_p Data;
-	shared_ptr<ClientNode> Next;
+	Client* Data;
+	ClientNode* Next;
 };
-typedef shared_ptr<ClientNode> ClientNode_p;
 
 class Queue {
-	ClientNode_p Front;
+	ClientNode* Front;
 public:
 	Queue();
-	Queue(Client_p&);
+	Queue(Client*);
 	void push(Client&);
-	ClientNode_p& getFront();
-	ClientNode_p& pop();
+	ClientNode* getFront();
+	ClientNode* pop();
 	void ServeClient();
 };
 
