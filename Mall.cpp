@@ -1,17 +1,22 @@
 #include "Mall.h"
+
 Cart* Mall::Products = new Cart();
 
-
-
-bool Mall::Test(string Parcode,int Amount )
+bool Mall::Test(string Parcode, int Amount)
 {
-	ProductNode_p dump = Products->getFront();
-	while (dump)
+	ProductNode_p temp = Products->getFront();
+	while (temp)
 	{
-		if (dump->Amount >= Amount && dump->Info->Parcode == Parcode)
-		{
-			return true;
+		if (temp->Info->Parcode == Parcode) {
+			if (temp->Amount >= Amount)
+				return true;
 		}
 	}
 	return false;
 }
+
+Mall::Mall() {
+
+	;
+}
+

@@ -4,46 +4,70 @@
 using namespace std;
 int main() {
 	Mall m;
-	int x;
-	cout << "HELLO" << endl
-		<< "How many time you want to use program?" << endl;
-	cin >> x;
-	//m.Products->addtoMallproducts("milk", "12", 3);
-	//cout << Mall::Products->getFront()->Info;
-	while (x > 0)
-	{
+	string name, parcode;
+	int x, id, amount;
+	cout << "HELLO" << endl;
+
+	do {
 		cout << "Choose Number:" << endl
-			<< "1.Add Product to mall" << endl
-			<< "2.Add client to queue" << endl
-			<< "3.Add product to cart of client" << endl
-			<< "4.Serve client" << endl;
+			<< "1. Add Product to mall" << endl
+			<< "2. Add client to queue" << endl
+			<< "3. Add product to cart of client" << endl
+			<< "4. Serve client" << endl
+			<< "5. show all Clients" << endl
+			<< "0. exit" << endl;
+		cin >> x;
 		switch (x)
 		{
 		case(1):
 		{
-			string name, parcode;
-			int amount;
-			cout << "Enter Name,Code,amount of product" << endl;
+			cout << "Enter Name,Parcode,Amount of product" << endl;
 			cin >> name >> parcode >> amount;
-			m.Products->addtoMallproducts(name, parcode, amount);
+			Mall::Products->addtoMall(name, parcode, amount);
 			break;
 		}
 		case(2):
 		{
-			int y; int id;
-			cout << "How many client you need?" << endl;
-			cin >> y;
-			while (y > 0)
-			{
-				cout << "Enter client id" << endl;
-				cin >> id;
-				y--;
+			cout << "Enter client id" << endl;
+			cin >> id;
+			Client c(id);
+			m.Q.push(c);
+			break;
+		}
+
+		case(3):
+		{
+			cout << "enter Client id" << endl;
+			cin >> id;
+			cout << "Enter Parcode,needed amount of product" << endl;
+			cin >> parcode >> amount;
+			//ProductNode_p* dump = new ProductNode_p(new ProductNode());
+			for (ClientNode_p temp = m.Q.getFront(); temp; temp = temp->Next) {
+				if (temp->Data->getId() == id)
+				{
+					temp->Data->getCart().addtoClientCart(parcode, amount);
+					break;
+				}
 			}
+			break;
 		}
+		case(4):
+		{
+			m.Q.ServeClient();
+			break;
 		}
-				
-		x-- ;
-	}
-	
+		case(5):
+		{
+			for (ClientNode_p temp = m.Q.getFront(); temp; temp = temp->Next) {
+				cout << temp->Data;
+			}
+			break;
+		}
+		case(0):
+			cout << "Good bye." << endl;
+			break;
+		}
+	} while (x != 0);
+
 	return 0;
 }

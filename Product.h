@@ -36,7 +36,8 @@ public:
 	Cart();
 	ProductNode_p& getFront();
 	void addtoClientCart(string,int);
-	void addtoMallproducts(string, string, int);
+	void addtoMall(string, string, int);
 	shared_ptr<ProductNode>& addInfo(string, string = "unKnown!");
 	shared_ptr<ProductNode>& popFront();
 };
+ostream& operator<< (ostream& output, Cart& C);

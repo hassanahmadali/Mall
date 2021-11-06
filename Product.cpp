@@ -84,9 +84,8 @@ void Cart::addtoClientCart(string Parcode, int Amount)
 			<< "returned all Amount in Mall.";
 	}
 }
-void Cart::addtoMallproducts(string name, string parcode, int amount) {
-	ProductNode_p& MallFront = Mall::Products->getFront();
-	for (ProductNode_p temp = MallFront; temp; temp = temp->Next) {
+void Cart::addtoMall(string name, string parcode, int amount) {
+	for (ProductNode_p temp = Mall::Products->getFront(); temp; temp = temp->Next) {
 		if (temp->Info->Parcode == parcode) {
 			temp->Amount += amount;
 		}
@@ -100,8 +99,11 @@ void Cart::addtoMallproducts(string name, string parcode, int amount) {
 			Front = (*N);
 		}
 	}
+}
 
-	//ProductInfo* Info = new ProductInfo(name, parcode);
-	//ProductNode_p* Node = new 
-
+ostream& operator<< (ostream& output, Cart& C) {
+	for (ProductNode_p temp = C.getFront(); temp; temp = temp->Next) {
+		output << temp->Info << " Amount " << temp->Amount;
+	}
+	return output;
 }

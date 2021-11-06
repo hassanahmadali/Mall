@@ -9,9 +9,11 @@ class Client {
 public:
 	Client(int);
 	int getId()const;
+	Cart getCart();
 	void push(ProductNode_p&);
 	ProductNode_p& pop();
 };
+
 typedef shared_ptr<Client> Client_p;
 
 class ClientNode {
@@ -23,13 +25,11 @@ public:
 typedef shared_ptr<ClientNode> ClientNode_p;
 
 class Queue {
-	Queue();
 	ClientNode_p Front;
 public:
-
+	Queue();
 	Queue(Client_p&);
-
-	void push(Client_p&);
+	void push(Client&);
 	ClientNode_p& getFront();
 	ClientNode_p& pop();
 	void ServeClient();
