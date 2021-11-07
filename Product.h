@@ -1,4 +1,5 @@
 #pragma once
+#define uKn "unKnown Product Name! "
 
 #include <string>
 #include <iostream>
@@ -13,7 +14,11 @@ public:
 	const string Parcode;
 	bool operator==(ProductInfo&)const;
 	bool operator==(string)const;
+	
 };
+ostream& operator<<(ostream& output, ProductInfo& rhs);
+ostream& operator<<(ostream& output, ProductInfo* rhs);
+
 
 class ProductNode {
 	ProductNode();
@@ -30,8 +35,7 @@ private:
 	ProductList();
 public:
 	ProductList(string, string, int = 0);
-	void addtoList(string, int);
-	ProductNode* addInfo(string, string = "unKnown!");
+	ProductNode* addInfo(string P, int A= 0, string N = uKn);
 	ProductNode* getFront();
 	void popFront();
 	static ProductList* MallProducts;
@@ -40,6 +44,8 @@ public:
 class Cart {
 	Cart();
 public:
+
 	ProductList* Data;
 	Cart(string, string, int = 0);
 };
+

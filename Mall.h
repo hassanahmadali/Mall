@@ -4,6 +4,5 @@ class Mall
 {
 
 public:
-	Queue Q;
 
 };
