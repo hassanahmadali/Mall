@@ -4,9 +4,7 @@
 #include <iostream>
 #include <iomanip>
 
-
 using namespace std;
-
 
 class ProductInfo {
 public:
@@ -18,21 +16,30 @@ public:
 };
 
 class ProductNode {
+	ProductNode();
 public:
 	int Amount;
-	ProductNode();
+	ProductNode(string, string, int = 0);
 	ProductInfo* Info;
 	ProductNode* Next;
 };
 
-class Cart {
+class ProductList {
 private:
 	ProductNode* Front;
+	ProductList();
 public:
-	Cart();
-	ProductNode* getFront();
-	void addtoClientCart(string, int);
-	void addtoMall(string, string, int);
+	ProductList(string, string, int = 0);
+	void addtoList(string, int);
 	ProductNode* addInfo(string, string = "unKnown!");
-	ProductNode* popFront();
+	ProductNode* getFront();
+	void popFront();
+	static ProductList* MallProducts;
+};
+
+class Cart {
+	Cart();
+public:
+	ProductList* Data;
+	Cart(string, string, int = 0);
 };
