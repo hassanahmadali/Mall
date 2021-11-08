@@ -2,7 +2,6 @@
 #include "Client.h"
 class Mall
 {
-
 public:
 
 };

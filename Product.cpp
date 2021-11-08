@@ -73,25 +73,25 @@ ostream& operator<< (ostream& output, ProductList& C)
 Cart::Cart(string P, int A  , string N)
 {
 
-	ProductNode* _Mall_Node = ProductList::MallProducts->addInfo(P);
-	if (_Mall_Node->Info->Name == "unKnown Product Name! ") {
-		_Mall_Node->Info->Name = N;
+	ProductNode* Mall_Node = Cart::MallProducts->addInfo(P , 0 , N);
+	if (Mall_Node->Info->Name == "unKnown Product Name! ") {
+		Mall_Node->Info->Name = N;
 	}
-	if (_Mall_Node->Amount >= A)
+	if (Mall_Node->Amount >= A)
 	{
 		Data = new ProductList(P, N, A);
-		_Mall_Node->Amount -= A;
+		Mall_Node->Amount -= A;
 	}
 	else {
-		Data = new ProductList(P, N, _Mall_Node->Amount);
-		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << _Mall_Node->Amount;
-		_Mall_Node->Amount = 0;
+		Data = new ProductList(P, N, Mall_Node->Amount);
+		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << Mall_Node->Amount;
+		Mall_Node->Amount = 0;
 	}
 
 }
 ProductNode* Cart::addInfo(string P, int A, string N)
 {
-	ProductNode* Mall_Node = ProductList::MallProducts->addInfo(P, 0, N);
+	ProductNode* Mall_Node = Cart::MallProducts->addInfo(P, 0, N);
 	if (Mall_Node->Amount < A) {
 		int temp = Mall_Node->Amount;
 		Mall_Node->Amount = 0;

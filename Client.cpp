@@ -15,7 +15,7 @@ ProductNode* Client::addInfo(string P, int A, string N)
 		ClientCart = new Cart(P, 0, N);
 		new_ProductNode = ClientCart->addInfo(P, 0, N);
 	}
-	ProductNode* Mall_Node = ProductList::MallProducts->addInfo(P, 0, N);
+	ProductNode* Mall_Node = Cart::MallProducts->addInfo(P, 0, N);
 	if (Mall_Node->Amount <= A) {
 		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << Mall_Node->Amount;
 		new_ProductNode->Amount += Mall_Node->Amount;

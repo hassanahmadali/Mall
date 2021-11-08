@@ -28,26 +28,27 @@ public:
 	ProductInfo* Info;
 	ProductNode* Next;
 };
-
 class ProductList {
 private:
 	ProductNode* Front;
 	ProductList();
 public:
-	ProductList(string, string, int = 0);
+	ProductList(string P, string N = "unKnown Product Name! ", int = 0);
 	ProductNode* addInfo(string P, int A = 0, string N = "unKnown Product Name! ");
 	ProductNode* getFront();
 	void popFront();
-	static ProductList* MallProducts;
 };
+
+ostream& operator<< (ostream& output, ProductList& C);
 
 class Cart {
 	Cart();
 public:
 
+	static ProductList* MallProducts;
 	ProductList* Data;
 	Cart(string P, int A =0, string N = "unKnown Product Name!");
 	ProductNode* addInfo(string P, int A = 0, string N = "unKnown Product Name! ");
-	
-
 };
+
+ProductList* Cart::MallProducts = new ProductList("0");
