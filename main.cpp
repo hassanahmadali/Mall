@@ -4,11 +4,13 @@
 
 using namespace std;
 int main() {
+	ProductList::MallProducts->addInfo("123");
+		/*
 	ProductList a("123", "one , two , three", 123);
 	auto* b = a.getFront();
 	a.addInfo("123", 123);
 	cout << b->Amount;
-
+	*/
 //	Mall m;
 //	string name, parcode;
 //	int x, id, amount;

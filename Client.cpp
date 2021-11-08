@@ -1,85 +1,93 @@
-//#include "Client.h"
-//#include"Product.h"
-//Client::Client(int i) :id(i)
-//{}
-//int Client::getId() const
-//{
-//	return id;
-//}
-//ProductList* Client::getCart()
-//{
-//	return ClientCart;
-//}
-//void Client::push(ProductNode* Node)
-//{
-//	ClientCart->addInfo(Node->Info->Parcode, Node->Info->Name);
-//}
-//ProductNode* Client::pop()
-//{
-//	return ClientCart->popFront();
-//}
-//
-//
-//
-//Queue::Queue():Front(NULL)
-//{
-//	;
-//}
-//
-//Queue::Queue(Client* C)
-//{
-//	ClientNode*  CNtemp(new ClientNode());
-//	CNtemp->Data = C;
-//	Front = CNtemp;
-//
-//}
-//
-//
-//void Queue::push(Client& p) {
-//	Client* Cp(& p);
-//	for (ClientNode* temp = Front; temp; temp = temp->Next) {
-//		if (temp->Next) continue;
-//		else {
-//			ClientNode*  CNtemp =new ClientNode();
-//			CNtemp->Data = Cp;
-//			temp->Next = CNtemp;
-//		}
-//	}
-//}
-//
-//
-//
-//ClientNode* Queue::pop() {
-//	ClientNode* CNtemp = Front;
-//	Front = Front->Next;
-//	return CNtemp;
-//}
-//
-//ClientNode::ClientNode() :Data(NULL), Next(NULL)
-//{}
-//ClientNode* Queue::getFront()
-//{
-//	return Front;
-//}
-//void Queue::ServeClient()
-//{
-//	ClientNode* dump = getFront();
-//	while (dump)
-//	{
-//		pop();
-//	}
-//}
-//
-//
-//
-//ostream& operator<< (ostream& output, Client& C) {
-//	output << "Client ID " << C.getId();
-//	for (ProductNode* temp = C.getCart().getFront(); temp; temp = temp->Next) {
-//		output << temp->Info << " Amount " << temp->Amount;
-//	}
-//	return output;
-//}
-//
-//ostream& operator<< (ostream& output, ClientNode& C) {
-//	return output << C.Data;
-//}
+#include "Client.h"
+
+Client::Client(int I) :id(I), ClientCart(NULL)
+{
+	;
+}
+
+ProductNode* Client::addInfo(string P, int A, string N)
+{
+	ProductNode* new_ProductNode;
+	if (ClientCart) {
+		new_ProductNode = ClientCart->addInfo(P, 0, N);
+	}
+	else {
+		ClientCart = new Cart(P, 0, N);
+		new_ProductNode = ClientCart->addInfo(P, 0, N);
+	}
+	ProductNode* Mall_Node = ProductList::MallProducts->addInfo(P, 0, N);
+	if (Mall_Node->Amount <= A) {
+		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << Mall_Node->Amount;
+		new_ProductNode->Amount += Mall_Node->Amount;
+		Mall_Node->Amount = 0;
+		return new_ProductNode;
+	}
+	else {
+		Mall_Node->Amount -= A;
+		new_ProductNode->Amount += A;
+		return new_ProductNode;
+	}
+}
+
+void Client::pop()
+{
+	if (ClientCart) {
+		ClientCart->Data->popFront();
+	}
+}
+
+ProductNode* Client::getFront()
+{
+	if (ClientCart) {
+		return ClientCart->Data->getFront();
+	}
+	return NULL;
+}
+
+
+ClientNode::ClientNode(int id)
+{
+	Data = new Client(id);
+	Next = NULL;
+}
+
+Queue::Queue(int id) {
+	Front = new ClientNode(id);
+}
+
+ClientNode* Queue::push(int id) {
+	ClientNode* temp_ClientNode = Front;
+	if (Front) {
+		for (; temp_ClientNode; temp_ClientNode = temp_ClientNode->Next) {
+			if (temp_ClientNode->Next == NULL) {
+				break;
+			}
+			else
+				if (temp_ClientNode->Data->id == id)
+					return temp_ClientNode;
+		}
+		temp_ClientNode->Next = new ClientNode(id);
+		return temp_ClientNode->Next;
+
+	}
+
+	else {
+	Front = new ClientNode(id);
+	return Front;
+	}
+}
+
+void Queue::pop() {
+	Front = Front->Next;
+}
+
+ClientNode* Queue::getFront()
+{
+	return Front;
+}
+
+void Queue::ServeClient()
+{
+	pop();
+}
+

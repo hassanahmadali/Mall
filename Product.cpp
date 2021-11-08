@@ -2,6 +2,7 @@
 #include"Mall.h"
 
 
+
 ProductInfo::ProductInfo(string p, string N) :Parcode(p), Name(N) {
 	;
 }
@@ -44,7 +45,7 @@ ProductNode* ProductList::getFront()
 ProductNode* ProductList::addInfo(string P, int A, string N) {
 	for (ProductNode* _temp_ProductNode = Front; _temp_ProductNode; _temp_ProductNode = _temp_ProductNode->Next)
 		if (_temp_ProductNode->Info->Parcode == P) {
-			if (_temp_ProductNode->Info->Name == uKn) _temp_ProductNode->Info->Name = N;
+			if (_temp_ProductNode->Info->Name == "unKnown Product Name! ") _temp_ProductNode->Info->Name = N;
 			_temp_ProductNode->Amount += A;
 			return _temp_ProductNode;
 		}
@@ -69,10 +70,11 @@ ostream& operator<< (ostream& output, ProductList& C)
 	return output;
 }
 
-Cart::Cart(string P, string N, int A)
+Cart::Cart(string P, int A  , string N)
 {
+
 	ProductNode* _Mall_Node = ProductList::MallProducts->addInfo(P);
-	if (_Mall_Node->Info->Name == uKn) {
+	if (_Mall_Node->Info->Name == "unKnown Product Name! ") {
 		_Mall_Node->Info->Name = N;
 	}
 	if (_Mall_Node->Amount >= A)
@@ -85,13 +87,21 @@ Cart::Cart(string P, string N, int A)
 		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << _Mall_Node->Amount;
 		_Mall_Node->Amount = 0;
 	}
+
 }
-//
-//void ProductList::addtoMall(string P, string N, int A) {
-//	if (Mall::Products) {
-//		Mall::Products->addInfo(P, N)->Amount += A;
-//	}
-//	else {
-//		Mall::Products = new ProductList(P, N, A);
-//	}
-//}
+ProductNode* Cart::addInfo(string P, int A, string N)
+{
+	ProductNode* Mall_Node = ProductList::MallProducts->addInfo(P, 0, N);
+	if (Mall_Node->Amount < A) {
+		int temp = Mall_Node->Amount;
+		Mall_Node->Amount = 0;
+		cout << "there is not enough prouducts in the mall returned all amount in the mall which is " << temp;
+		return Data->addInfo(P, temp, N);
+
+	}
+	else
+	{
+		return Data->addInfo(P, A, N);
+	}
+
+}

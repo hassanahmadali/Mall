@@ -1,36 +1,31 @@
 #pragma once
 #include "Product.h"
-//#ifndef CLIENT_H
-//
-//class Client {
-//	int id;
-//	ProductList *ClientCart;
-//	Client();
-//public:
-//	Client(int);
-//	int getId()const;
-//	ProductList *getCart();
-//	void push(ProductNode*);
-//	void pop();
-//	ProductNode* getFront();
-//
-//};
-//class ClientNode {
-//public:
-//	ClientNode();
-//	Client* Data;
-//	ClientNode* Next;
-//};
-//
-//class Queue {
-//	ClientNode* Front;
-//public:
-//	Queue();
-//	Queue(Client*);
-//	void push(Client&);
-//	ClientNode* getFront();
-//	ClientNode* pop();
-//	void ServeClient();
-//};
-//
-//#endif
+
+class Client {
+	Cart *ClientCart;
+	Client();
+public:
+	Client(int);
+	const int id;
+	ProductNode* addInfo(string P , int A = 0 , string N = "unKnown Product Name! ");
+	void pop();
+	ProductNode* getFront();
+
+};
+class ClientNode {
+public:
+	ClientNode(int id);
+	Client* Data;
+	ClientNode* Next;
+};
+
+class Queue {
+public:
+	ClientNode* Front;
+	Queue(int id );
+	ClientNode* push(int id);
+	void pop();
+	ClientNode* getFront();
+	void ServeClient();
+	
+};
